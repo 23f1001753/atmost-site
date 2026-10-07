@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atmost: easy optimization for Mac</title>
+<meta name="description" content="Describe a decision, solve it in one click, and understand the answer in plain language. Linear and whole-number optimization that runs entirely on your Mac. Free.">
+<meta property="og:title" content="Atmost: easy optimization for Mac">
+<meta property="og:description" content="Describe a decision, solve it in one click, and understand the answer in plain language. Free, private, runs on your Mac.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://atmost.app/">
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+:root {
+  --bg: #f5f5f7;
+  --panel: #ffffff;
+  --panel-2: #f2f2f7;
+  --ink: #1d1d1f;
+  --ink-2: #5f5f66;
+  --ink-3: #8e8e93;
+  --line: rgba(60, 60, 67, 0.16);
+  --accent: #007aff;
+  --accent-hover: #0a6fe0;
+  --accent-soft: rgba(0, 122, 255, 0.1);
+  --good: #1f9d4a;
+  --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 30px rgba(0,0,0,.08);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,.18);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1c1e;
+    --panel: #2c2c2e;
+    --panel-2: #242426;
+    --ink: #f5f5f7;
+    --ink-2: #b0b0b8;
+    --ink-3: #8e8e93;
+    --line: rgba(235,235,245,.16);
+    --accent: #0a84ff;
+    --accent-hover: #3b9bff;
+    --accent-soft: rgba(10,132,255,.18);
+    --good: #32d74b;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 30px rgba(0,0,0,.3);
+    --shadow-lg: 0 20px 60px rgba(0,0,0,.5);
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 17px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+/* nav */
+nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: saturate(180%) blur(18px); -webkit-backdrop-filter: saturate(180%) blur(18px); border-bottom: 1px solid var(--line); }
+nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 650; font-size: 18px; color: var(--ink); letter-spacing: -.01em; }
+.brand img { width: 28px; height: 28px; border-radius: 7px; }
+.brand:hover { text-decoration: none; }
+nav .links { display: flex; align-items: center; gap: 22px; font-size: 15px; }
+nav .links a.plain { color: var(--ink-2); }
+nav .links a.plain:hover { color: var(--ink); text-decoration: none; }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; font: inherit; font-weight: 600; padding: 12px 22px; border-radius: 12px; border: 0; cursor: pointer; }
+.btn:hover { background: var(--accent-hover); text-decoration: none; }
+.btn.small { padding: 7px 14px; font-size: 14px; border-radius: 9px; }
+.btn.ghost { background: var(--accent-soft); color: var(--accent); }
+.btn.ghost:hover { background: var(--accent-soft); filter: brightness(.95); }
+
+/* hero */
+.hero { text-align: center; padding: 84px 0 40px; }
+.hero h1 { font-size: clamp(38px, 6.4vw, 66px); line-height: 1.04; letter-spacing: -.035em; margin: 0 auto 20px; max-width: 14em; font-weight: 700; }
+.hero p.lead { font-size: clamp(18px, 2.4vw, 22px); line-height: 1.45; color: var(--ink-2); max-width: 34em; margin: 0 auto 32px; }
+.hero .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.hero .fine { margin-top: 16px; font-size: 14px; color: var(--ink-3); }
+.shot { margin: 56px auto 0; max-width: 960px; border-radius: 14px; box-shadow: var(--shadow-lg); border: 1px solid var(--line); overflow: hidden; background: var(--panel); }
+.shot img { display: block; width: 100%; height: auto; }
+.shot.empty { display: none; }
+
+/* sections */
+section { padding: 72px 0; }
+section.alt { background: var(--panel-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+h2 { font-size: clamp(28px, 4vw, 40px); line-height: 1.1; letter-spacing: -.028em; margin: 0 0 14px; font-weight: 700; }
+.sub { color: var(--ink-2); font-size: 19px; max-width: 36em; margin: 0 0 40px; }
+.center { text-align: center; }
+.center .sub { margin-left: auto; margin-right: auto; }
+
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.card { background: var(--panel); border-radius: 18px; padding: 26px; box-shadow: var(--shadow); border: 1px solid var(--line); }
+.card h3 { margin: 0 0 8px; font-size: 19px; letter-spacing: -.01em; }
+.card p { margin: 0; color: var(--ink-2); font-size: 16px; }
+.card .ico { width: 40px; height: 40px; border-radius: 11px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: 16px; font-size: 20px; }
+
+/* steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; counter-reset: s; }
+.steps li { counter-increment: s; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px 18px; box-shadow: var(--shadow); }
+.steps li::before { content: counter(s); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 14px; margin-bottom: 12px; }
+.steps b { display: block; font-size: 17px; margin-bottom: 4px; }
+.steps span { color: var(--ink-2); font-size: 15px; line-height: 1.4; display: block; }
+
+/* split */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.ticks { list-style: none; padding: 0; margin: 0; }
+.ticks li { padding-left: 30px; position: relative; margin-bottom: 12px; color: var(--ink-2); }
+.ticks li b { color: var(--ink); font-weight: 600; }
+.ticks li::before { content: ""; position: absolute; left: 0; top: 5px; width: 18px; height: 18px; border-radius: 50%; background: var(--good); opacity: .95; }
+.ticks li::after { content: ""; position: absolute; left: 6px; top: 9px; width: 5px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg) scale(.9); }
+
+/* verified table */
+table { width: 100%; border-collapse: collapse; background: var(--panel); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--line); font-size: 15.5px; }
+th, td { text-align: left; padding: 13px 18px; border-bottom: 1px solid var(--line); }
+th { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); font-weight: 600; background: var(--panel-2); }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; font-weight: 600; }
+
+/* faq */
+details { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px 20px; margin-bottom: 10px; }
+summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--ink-3); font-size: 22px; line-height: 1; }
+details[open] summary::after { content: "\2212"; }
+details p { margin: 12px 0 0; color: var(--ink-2); }
+.faq { max-width: 720px; margin: 0 auto; }
+
+.final { text-align: center; padding: 84px 0; }
+footer { border-top: 1px solid var(--line); padding: 28px 0 44px; color: var(--ink-3); font-size: 14px; }
+footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+footer a { color: var(--ink-2); }
+
+@media (max-width: 860px) {
+  .grid3, .split { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .hero { padding-top: 56px; }
+  section { padding: 52px 0; }
+  nav .links a.plain { display: none; }
+}
+@media (max-width: 480px) { .steps { grid-template-columns: 1fr; } th, td { padding: 11px 12px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="icon.png" alt="" width="28" height="28">Atmost</a>
+    <div class="links">
+      <a class="plain" href="#how">How it works</a>
+      <a class="plain" href="#trust">Accuracy</a>
+      <a class="plain" href="#faq">FAQ</a>
+      <a class="btn small" href="#download" data-download>Download</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <h1>Make the best decision, not just a guess.</h1>
+    <p class="lead">Describe what you can choose and what limits you. Atmost finds the best answer in one click, then explains it in plain language. No code, no cell references.</p>
+    <div class="cta">
+      <a class="btn" href="#download" data-download>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+        Download for Mac
+      </a>
+      <a class="btn ghost" href="#how">See how it works</a>
+    </div>
+    <p class="fine">Free · macOS 11 or later · Apple Silicon and Intel</p>
+    <div class="shot" id="shot"><img src="screenshot.png" alt="Atmost showing a solved production-planning model with the answer explained in plain words" onerror="this.parentNode.classList.add('empty')"></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="grid3">
+      <div class="card">
+        <div class="ico">✎</div>
+        <h3>Say it in tables and lists</h3>
+        <p>Products, machines, cities: list them once, fill in the numbers, and set your goal and rules as sentences. Paste straight from Excel or import a CSV.</p>
+      </div>
+      <div class="card">
+        <div class="ico">✓</div>
+        <h3>Answers you can explain</h3>
+        <p>See what to do, what is fully used, what is spare, and what one more unit would be worth, all written as sentences you can put in a report.</p>
+      </div>
+      <div class="card">
+        <div class="ico">⚠</div>
+        <h3>Never a silent “no solution”</h3>
+        <p>When rules clash, Atmost names the conflicting rules and how far they would have to bend. Mistakes in your data point to the exact cell.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="how">
+  <div class="wrap">
+    <div class="center">
+      <h2>From question to answer in five steps</h2>
+      <p class="sub">The sidebar works as a checklist, so you always know what is left.</p>
+    </div>
+    <ol class="steps">
+      <li><b>Data</b><span>Lists and tables of your numbers</span></li>
+      <li><b>Decide</b><span>What you can choose: any amount, whole number or yes/no</span></li>
+      <li><b>Goal</b><span>Make as much as possible, or spend as little</span></li>
+      <li><b>Rules</b><span>At most, at least or exactly</span></li>
+      <li><b>Solve</b><span>One click, ⌘R. Then slide numbers to try what-ifs</span></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div>
+      <h2>Private because it never leaves your Mac</h2>
+      <p class="sub" style="margin-bottom:24px">Atmost runs the open-source HiGHS solver inside the app. There is nothing to sign up for and nothing to upload.</p>
+      <ul class="ticks">
+        <li><b>Works offline.</b> Solve on a plane, a train or a campus with poor Wi-Fi.</li>
+        <li><b>No account, no cloud, no telemetry.</b></li>
+        <li><b>No AI guesses.</b> Every explanation comes from fixed rules, so the same model always gives the same words.</li>
+        <li><b>No lock-in.</b> Export to Python (PuLP), the standard .lp format, or Excel at any time.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Built for real course problems</h3>
+      <p style="margin-bottom:14px">Start from a template and change the numbers:</p>
+      <ul class="ticks" style="margin:0">
+        <li><b>Production mix</b></li>
+        <li><b>Transportation</b></li>
+        <li><b>Assignment</b></li>
+        <li><b>Diet</b></li>
+        <li><b>Staff scheduling</b> (whole numbers)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="trust">
+  <div class="wrap">
+    <div class="center">
+      <h2>Checked against known answers</h2>
+      <p class="sub">Each template is compared with a hand calculation, a textbook value or an independent solver.</p>
+    </div>
+    <table>
+      <thead><tr><th>Problem</th><th>Optimal value</th><th>Checked against</th></tr></thead>
+      <tbody>
+        <tr><td>Production mix</td><td class="num">2,300</td><td>Hand calculation</td></tr>
+        <tr><td>Transportation</td><td class="num">153.675</td><td>Dantzig’s textbook value and SciPy</td></tr>
+        <tr><td>Assignment</td><td class="num">13</td><td>Brute force over all 24 assignments</td></tr>
+        <tr><td>Diet</td><td class="num">116.1918</td><td>SciPy</td></tr>
+        <tr><td>Staff scheduling</td><td class="num">23</td><td>SciPy <code>milp</code> (whole numbers matter here)</td></tr>
+        <tr><td>Wyndor Glass</td><td class="num">36</td><td>Textbook</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap final" style="padding-top:0;padding-bottom:0">
+    <h2>Get Atmost</h2>
+    <p class="sub" style="margin-left:auto;margin-right:auto">Free for Mac. Open the .dmg, drag Atmost to Applications, and you are ready.</p>
+    <a class="btn" href="#" data-download id="dl">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+      Download for Mac
+    </a>
+    <p class="fine" style="margin-top:14px;font-size:14px;color:var(--ink-3)">Version 0.1.0 · Free</p>
+  </div>
+</section>
+
+<section class="alt" id="faq">
+  <div class="wrap">
+    <div class="center"><h2>Questions</h2></div>
+    <div class="faq" style="margin-top:28px">
+      <details><summary>Is it really free?</summary><p>Yes. Atmost is free to download and use. There is no account and no trial period.</p></details>
+      <details><summary>What kinds of problems can it solve?</summary><p>Linear problems, where amounts can be any number, and mixed-integer problems, where some choices must be whole numbers or yes/no. That covers production planning, blending, transport, assignment, scheduling and similar course and business problems. It does not solve curved (non-linear) problems.</p></details>
+      <details><summary>How big a model can it handle?</summary><p>There is no variable cap like Excel Solver’s 200. Very large whole-number models will take longer, because the solver runs on your own machine.</p></details>
+      <details><summary>Does it work on Windows or iPad?</summary><p>Not yet. Atmost is Mac-only for now.</p></details>
+      <details><summary>Can I use the results in a report or assignment?</summary><p>Yes. Results and explanations are written as plain sentences, and you can export the model to Excel, to Python (PuLP) or to the standard .lp format to check it elsewhere.</p></details>
+      <details><summary>macOS says it cannot open the app.</summary><p>Download only from this page. If macOS still blocks it, open System Settings → Privacy &amp; Security and choose “Open Anyway”, then <a href="mailto:hello@atmost.app">tell us</a> so we can fix it.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Atmost</span>
+    <span><a href="mailto:hello@atmost.app">hello@atmost.app</a> · Uses the open-source <a href="https://highs.dev">HiGHS</a> solver</span>
+  </div>
+</footer>
+
+<script>
+  // Flip RELEASED to true once the .dmg is attached to a release in the atmost-site repo.
+  var RELEASED = false;
+  var DOWNLOAD_URL = "https://github.com/23f1001753/atmost-site/releases/latest/download/Atmost.dmg";
+  document.querySelectorAll("[data-download]").forEach(function (a) {
+    if (RELEASED) {
+      if (a.id === "dl") a.href = DOWNLOAD_URL;
+    } else {
+      a.removeAttribute("href");
+      a.setAttribute("aria-disabled", "true");
+      a.style.cursor = "default";
+      a.lastChild.textContent = a.classList.contains("small") ? "Coming soon" : "Coming soon for Mac";
+      if (a.querySelector("svg")) a.querySelector("svg").remove();
+    }
+  });
+</script>
+</body>
+</html>
