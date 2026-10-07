@@ -264,7 +264,7 @@ footer a { color: var(--ink-2); }
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
       Download for Mac
     </a>
-    <p class="fine" style="margin-top:14px;font-size:14px;color:var(--ink-3)">Version 0.1.0 · Free</p>
+    <p class="fine" style="margin-top:14px;font-size:14px;color:var(--ink-3)">Version 0.1.0 · Free · Notarized by Apple · Updates itself</p>
   </div>
 </section>
 
@@ -291,11 +291,11 @@ footer a { color: var(--ink-2); }
 
 <script>
   // Flip RELEASED to true once the .dmg is attached to a release in the atmost-site repo.
-  var RELEASED = false;
+  var RELEASED = true;
   var DOWNLOAD_URL = "https://github.com/23f1001753/atmost-site/releases/latest/download/Atmost.dmg";
   document.querySelectorAll("[data-download]").forEach(function (a) {
     if (RELEASED) {
-      if (a.id === "dl") a.href = DOWNLOAD_URL;
+      a.href = DOWNLOAD_URL;
     } else {
       a.removeAttribute("href");
       a.setAttribute("aria-disabled", "true");

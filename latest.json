@@ -1,0 +1,23 @@
+{
+  "version": "0.1.0",
+  "notes": "First release of Atmost.",
+  "pub_date": "2026-10-07T08:47:10Z",
+  "platforms": {
+    "darwin-aarch64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRR2xhQkpTVTVUQVJKNzEzcjhRT0FWWFYwd2hNcDdObHVxOWFrdFhVVTZhaXNZTFpFSnlNdExXWGFRMHltam5mYXVRMDdYTmJhZGxJQm9Ec0x4V1ppeU9kSWVvODRsOEFZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkxMzYyNTYyCWZpbGU6QXRtb3N0LmFwcC50YXIuZ3oJdmVyc2lvbjowLjEuMApUbTFjVW9SN0ptMWRJbmphRlA1dW9KMGVXS0pBQmo3SG5pU0dwUjlvZnJSUDZYMnhNM0haVXdNUDdHbGphM1RVRDJqU0ozbW1zOXhMT2lRcWJIQUtDUT09Cg==",
+      "url": "https://github.com/23f1001753/atmost-site/releases/download/v0.1.0/Atmost.app.tar.gz"
+    },
+    "darwin-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRR2xhQkpTVTVUQVJKNzEzcjhRT0FWWFYwd2hNcDdObHVxOWFrdFhVVTZhaXNZTFpFSnlNdExXWGFRMHltam5mYXVRMDdYTmJhZGxJQm9Ec0x4V1ppeU9kSWVvODRsOEFZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkxMzYyNTYyCWZpbGU6QXRtb3N0LmFwcC50YXIuZ3oJdmVyc2lvbjowLjEuMApUbTFjVW9SN0ptMWRJbmphRlA1dW9KMGVXS0pBQmo3SG5pU0dwUjlvZnJSUDZYMnhNM0haVXdNUDdHbGphM1RVRDJqU0ozbW1zOXhMT2lRcWJIQUtDUT09Cg==",
+      "url": "https://github.com/23f1001753/atmost-site/releases/download/v0.1.0/Atmost.app.tar.gz"
+    },
+    "darwin-aarch64-app": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRR2xhQkpTVTVUQVJKNzEzcjhRT0FWWFYwd2hNcDdObHVxOWFrdFhVVTZhaXNZTFpFSnlNdExXWGFRMHltam5mYXVRMDdYTmJhZGxJQm9Ec0x4V1ppeU9kSWVvODRsOEFZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkxMzYyNTYyCWZpbGU6QXRtb3N0LmFwcC50YXIuZ3oJdmVyc2lvbjowLjEuMApUbTFjVW9SN0ptMWRJbmphRlA1dW9KMGVXS0pBQmo3SG5pU0dwUjlvZnJSUDZYMnhNM0haVXdNUDdHbGphM1RVRDJqU0ozbW1zOXhMT2lRcWJIQUtDUT09Cg==",
+      "url": "https://github.com/23f1001753/atmost-site/releases/download/v0.1.0/Atmost.app.tar.gz"
+    },
+    "darwin-x86_64-app": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRR2xhQkpTVTVUQVJKNzEzcjhRT0FWWFYwd2hNcDdObHVxOWFrdFhVVTZhaXNZTFpFSnlNdExXWGFRMHltam5mYXVRMDdYTmJhZGxJQm9Ec0x4V1ppeU9kSWVvODRsOEFZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkxMzYyNTYyCWZpbGU6QXRtb3N0LmFwcC50YXIuZ3oJdmVyc2lvbjowLjEuMApUbTFjVW9SN0ptMWRJbmphRlA1dW9KMGVXS0pBQmo3SG5pU0dwUjlvZnJSUDZYMnhNM0haVXdNUDdHbGphM1RVRDJqU0ozbW1zOXhMT2lRcWJIQUtDUT09Cg==",
+      "url": "https://github.com/23f1001753/atmost-site/releases/download/v0.1.0/Atmost.app.tar.gz"
+    }
+  }
+}
